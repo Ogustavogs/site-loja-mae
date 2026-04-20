@@ -3,121 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feminina Bijuteria | Experiência de Luxo com IA</title>
+    <title>Feminina Bijuteria | Semijoias de Luxo</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
         .serif { font-family: 'Playfair Display', serif; }
-        .hover-effect { transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
-        .hover-effect:hover { transform: scale(1.03); }
+        .hover-effect { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .hover-effect:hover { transform: translateY(-5px); }
         
-        /* Sidebar Transition */
-        #sidebar { transition: transform 0.6s cubic-bezier(0.85, 0, 0.15, 1); }
-        .overlay { transition: opacity 0.5s ease; pointer-events: none; opacity: 0; }
+        /* Menu lateral mais suave */
+        #sidebar { transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1); }
+        .overlay { transition: opacity 0.4s ease; pointer-events: none; opacity: 0; }
         .overlay.active { pointer-events: auto; opacity: 1; }
 
-        /* Chat Window Transition */
+        /* Ajuste do chat para mobile */
         #chat-window { 
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            transform-origin: bottom right;
+            transition: all 0.4s ease;
+            max-width: 90vw;
         }
     </style>
 </head>
 <body class="bg-[#faf9f6] text-[#2c2c2c] overflow-x-hidden selection:bg-[#ffedfa]">
 
-    <div id="overlay" class="overlay fixed inset-0 bg-black/20 backdrop-blur-sm z-[60]" onclick="toggleSidebar()"></div>
-    <aside id="sidebar" class="fixed top-0 left-0 h-full w-80 bg-white z-[70] shadow-2xl -translate-x-full p-10 flex flex-col justify-between border-r border-[#ffedfa]">
+    <div id="overlay" class="overlay fixed inset-0 bg-black/40 backdrop-blur-sm z-[60]" onclick="toggleSidebar()"></div>
+    
+    <aside id="sidebar" class="fixed top-0 left-0 h-full w-72 bg-white z-[70] shadow-2xl -translate-x-full p-8 flex flex-col justify-between border-r border-[#ffedfa]">
         <div>
-            <div class="flex justify-between items-center mb-16">
-                <h2 class="serif text-xl tracking-widest uppercase">Explorar</h2>
-                <button onclick="toggleSidebar()" class="text-stone-400 hover:text-black hover-effect">✕</button>
+            <div class="flex justify-between items-center mb-12">
+                <h2 class="serif text-xl tracking-widest uppercase text-[#e03a9f]">Categorias</h2>
+                <button onclick="toggleSidebar()" class="text-stone-400 p-2">✕</button>
             </div>
-            <nav class="space-y-8">
-                <a href="#" class="group block"><span class="text-[10px] tracking-[0.4em] uppercase text-[#e03a9f] block mb-1">Destaques</span><span class="text-lg hover:pl-2 transition-all duration-300 group-hover:text-[#e03a9f]">Best Sellers</span></a>
-                <a href="#" class="group block"><span class="text-[10px] tracking-[0.4em] uppercase text-stone-400 block mb-1">Consultoria</span><span class="text-lg hover:pl-2 transition-all duration-300 group-hover:text-[#e03a9f]">Guia de Estilo</span></a>
-                <a href="#" class="group block"><span class="text-[10px] tracking-[0.4em] uppercase text-[#e03a9f] block mb-1">IA Assistente</span><span class="text-lg hover:pl-2 transition-all duration-300 group-hover:text-[#e03a9f]" onclick="toggleChat()">Falar com Luna</span></a>
+            <nav class="space-y-6">
+                <a href="#" class="group block border-b border-stone-50 pb-2"><span class="text-lg hover:pl-2 transition-all group-hover:text-[#e03a9f]">Colares & Chokers</span></a>
+                <a href="#" class="group block border-b border-stone-50 pb-2"><span class="text-lg hover:pl-2 transition-all group-hover:text-[#e03a9f]">Brincos</span></a>
+                <a href="#" class="group block border-b border-stone-50 pb-2"><span class="text-lg hover:pl-2 transition-all group-hover:text-[#e03a9f]">Anéis</span></a>
+                <a href="#" class="group block border-b border-stone-50 pb-2"><span class="text-lg hover:pl-2 transition-all group-hover:text-[#e03a9f]">Pulseiras</span></a>
+                <a href="#" class="group block border-b border-stone-50 pb-2"><span class="text-lg hover:pl-2 transition-all group-hover:text-[#e03a9f]">Conjuntos Luxo</span></a>
             </nav>
         </div>
-        <div class="border-t border-stone-100 pt-8"><p class="text-[10px] tracking-widest text-stone-400 uppercase">Feminina Bijuteria</p></div>
+        <div class="pt-8 border-t border-stone-100">
+            <p class="text-[10px] tracking-widest text-stone-400 uppercase font-bold">Feminina Bijuteria ®</p>
+        </div>
     </aside>
 
-    <nav class="p-8 flex justify-between items-center bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-stone-100">
-        <div class="flex items-center gap-6">
-            <button onclick="toggleSidebar()" class="flex flex-col gap-1.5 hover-effect group">
-                <span class="w-6 h-[1px] bg-black group-hover:bg-[#e03a9f]"></span>
-                <span class="w-4 h-[1px] bg-black group-hover:bg-[#e03a9f]"></span>
+    <nav class="p-6 md:p-8 flex justify-between items-center bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-stone-100">
+        <div class="flex items-center gap-4 md:gap-6">
+            <button onclick="toggleSidebar()" class="flex flex-col gap-1.5 p-2" aria-label="Abrir Menu">
+                <span class="w-6 h-[1.5px] bg-black"></span>
+                <span class="w-4 h-[1.5px] bg-black"></span>
             </button>
-            <h1 class="serif text-2xl font-semibold tracking-[0.2em] uppercase hover-effect cursor-pointer">Feminina</h1>
+            <h1 class="serif text-xl md:text-2xl font-semibold tracking-[0.2em] uppercase">Feminina</h1>
         </div>
-        <a href="https://wa.me/5521999999999" class="hover-effect border border-black px-8 py-3 text-[10px] tracking-[0.3em] uppercase hover:bg-[#ffedfa] hover:text-[#e03a9f] transition-all rounded-full font-bold">WhatsApp</a>
+        <a href="https://wa.me/5521989626714?text=Olá!%20Vi%20o%20site%20e%20gostaria%20de%20conhecer%20as%20peças." target="_blank" class="bg-black text-white px-6 py-3 text-[10px] tracking-[0.2em] uppercase hover:bg-[#e03a9f] transition-all rounded-full font-bold shadow-lg">WhatsApp</a>
     </nav>
 
-    <main class="max-w-6xl mx-auto px-6 py-28 text-center border-x border-stone-100 min-h-screen">
-        <span class="text-[10px] tracking-[0.6em] uppercase text-[#e03a9f] mb-6 block font-bold">Curadoria de Luxo</span>
-        <h2 class="serif text-6xl md:text-8xl mb-10 leading-tight tracking-tight text-black">Seu brilho é a sua <br> <span class="italic font-light">melhor</span> versão.</h2>
-        <p class="text-lg text-stone-500 max-w-xl mx-auto mb-16 leading-relaxed font-light">Descubra peças que foram feitas para quem não aceita passar despercebida. De Realengo para o mundo.</p>
-        <div class="flex flex-col md:flex-row gap-8 justify-center items-center">
-            <a href="#vitrine" class="hover-effect bg-black text-white px-14 py-6 text-[11px] tracking-[0.3em] uppercase hover:bg-[#ffedfa] hover:text-[#e03a9f] transition-all shadow-2xl font-bold rounded-md">Explorar Coleção</a>
+    <main class="max-w-6xl mx-auto px-6 py-20 md:py-28 text-center min-h-[80vh] flex flex-col justify-center">
+        <span class="text-[10px] tracking-[0.5em] uppercase text-[#e03a9f] mb-6 block font-bold">Realengo • Rio de Janeiro</span>
+        <h2 class="serif text-4xl md:text-7xl mb-8 leading-tight text-black">Seu brilho é a sua <br> <span class="italic font-light text-[#e03a9f]">melhor</span> versão.</h2>
+        <p class="text-base md:text-lg text-stone-500 max-w-xl mx-auto mb-12 leading-relaxed">Curadoria exclusiva de semijoias feitas para mulheres que buscam sofisticação e brilho em cada detalhe.</p>
+        <div class="flex justify-center">
+            <a href="#vitrine" class="bg-black text-white px-12 py-5 text-[11px] tracking-[0.3em] uppercase hover:bg-stone-800 transition-all shadow-xl rounded-md font-bold">Ver Coleção</a>
         </div>
     </main>
 
-    <section id="vitrine" class="bg-white py-24 px-6 border-t border-stone-100">
-        <div class="max-w-6xl mx-auto text-center mb-16">
-            <h3 class="serif text-4xl text-black">Sua Próxima Paixão</h3>
-            <p class="text-stone-500 mt-4 max-w-lg mx-auto">Peças selecionadas pela Dona Maria para momentos inesquecíveis.</p>
-        </div>
-        
+    <section id="vitrine" class="bg-white py-20 px-6 border-t border-stone-100">
         <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div class="hover-effect group bg-white border border-stone-100 p-4 rounded-3xl shadow-sm hover:border-[#ffcce6] hover:bg-[#ffedfa] cursor-pointer">
-                <div class="aspect-square bg-stone-100 rounded-2xl flex items-center justify-center text-xs text-stone-300 uppercase tracking-widest mb-5 border border-stone-100 group-hover:border-[#ffcce6]">Foto Peça 1</div>
-                <h4 class="font-semibold text-sm group-hover:text-[#e03a9f]">Colar Riviera Brilhante</h4>
-                <p class="text-xs text-stone-500 mt-1">Toque de sofisticação</p>
-                <span class="text-sm font-bold mt-4 block text-black group-hover:text-[#e03a9f]">R$ 189,90</span>
+            <div class="hover-effect group bg-white border border-stone-100 p-4 rounded-3xl shadow-sm hover:border-[#ffcce6] cursor-pointer">
+                <div class="aspect-[4/5] bg-stone-50 rounded-2xl flex items-center justify-center text-xs text-stone-300 uppercase tracking-widest mb-5 border border-dashed border-stone-200">Aguardando Foto</div>
+                <h4 class="font-semibold text-sm">Coleção em Breve</h4>
+                <p class="text-xs text-stone-500 mt-1">Dona Maria está selecionando...</p>
+                <span class="text-sm font-bold mt-4 block text-[#e03a9f]">Consultar Preço</span>
             </div>
-            <div class="hover-effect group bg-white border border-stone-100 p-4 rounded-3xl shadow-sm hover:border-[#ffcce6] hover:bg-[#ffedfa] cursor-pointer">
-                <div class="aspect-square bg-stone-100 rounded-2xl flex items-center justify-center text-xs text-stone-300 uppercase tracking-widest mb-5 border border-stone-100 group-hover:border-[#ffcce6]">Foto Peça 2</div>
-                <h4 class="font-semibold text-sm group-hover:text-[#e03a9f]">Brinco Gota de Ouro</h4>
-                <p class="text-xs text-stone-500 mt-1">Clássico e atemporal</p>
-                <span class="text-sm font-bold mt-4 block text-black group-hover:text-[#e03a9f]">R$ 124,90</span>
             </div>
-            <div class="hover-effect group bg-white border border-stone-100 p-4 rounded-3xl shadow-sm hover:border-[#ffcce6] hover:bg-[#ffedfa] cursor-pointer">
-                <div class="aspect-square bg-stone-100 rounded-2xl flex items-center justify-center text-xs text-stone-300 uppercase tracking-widest mb-5 border border-stone-100 group-hover:border-[#ffcce6]">Foto Peça 3</div>
-                <h4 class="font-semibold text-sm group-hover:text-[#e03a9f]">Anel Solitário Fusion</h4>
-                <p class="text-xs text-stone-500 mt-1">Para momentos especiais</p>
-                <span class="text-sm font-bold mt-4 block text-black group-hover:text-[#e03a9f]">R$ 98,90</span>
-            </div>
-            <div class="hover-effect group bg-white border border-stone-100 p-4 rounded-3xl shadow-sm hover:border-[#ffcce6] hover:bg-[#ffedfa] cursor-pointer">
-                <div class="aspect-square bg-stone-100 rounded-2xl flex items-center justify-center text-xs text-stone-300 uppercase tracking-widest mb-5 border border-stone-100 group-hover:border-[#ffcce6]">Foto Peça 4</div>
-                <h4 class="font-semibold text-sm group-hover:text-[#e03a9f]">Pulseira Elos Cravejados</h4>
-                <p class="text-xs text-stone-500 mt-1">Estilo e personalidade</p>
-                <span class="text-sm font-bold mt-4 block text-black group-hover:text-[#e03a9f]">R$ 147,90</span>
-            </div>
-        </div>
     </section>
 
     <div class="fixed bottom-6 right-6 z-[100] flex flex-col items-end gap-4">
-        
-        <div id="chat-window" class="w-96 h-[500px] bg-white rounded-3xl shadow-2xl border border-[#ffedfa] flex flex-col justify-between overflow-hidden opacity-0 scale-0 origin-bottom-right transition-all duration-500">
-            <div class="p-6 bg-[#ffedfa]/50 backdrop-blur-sm border-b border-[#ffedfa] flex justify-between items-center">
+        <div id="chat-window" class="w-[350px] md:w-96 h-[450px] bg-white rounded-3xl shadow-2xl border border-[#ffedfa] flex flex-col justify-between overflow-hidden opacity-0 scale-0 origin-bottom-right pointer-events-none">
+            <div class="p-5 bg-[#ffedfa]/50 backdrop-blur-sm border-b border-[#ffedfa] flex justify-between items-center">
                 <div class="flex items-center gap-3">
-                    <div class="w-3 h-3 bg-[#e03a9f] rounded-full animate-pulse"></div>
-                    <h5 class="serif text-lg text-black">Conversar com Luna</h5>
+                    <div class="w-2 h-2 bg-[#e03a9f] rounded-full animate-ping"></div>
+                    <h5 class="serif text-base text-black">Consultora Luna</h5>
                 </div>
-                <button onclick="toggleChat()" class="text-stone-400 hover:text-black hover-effect">✕</button>
+                <button onclick="toggleChat()" class="text-stone-400 p-1">✕</button>
             </div>
-            <div id="chat-messages" class="flex-1 p-6 space-y-4 overflow-y-auto text-xs text-stone-600">
-                <p class="bg-[#ffedfa] p-3 rounded-xl rounded-bl-none max-w-[80%]">Olá! Sou a Luna, sua consultora virtual da Feminina Bijuteria. Como posso te ajudar a brilhar hoje?</p>
-                <p class="bg-stone-100 p-3 rounded-xl rounded-br-none max-w-[80%] self-end">Gostaria de ver sugestões de colares para uma festa.</p>
+            <div id="chat-messages" class="flex-1 p-5 space-y-4 overflow-y-auto text-xs text-stone-600 flex flex-col">
+                <p class="bg-[#ffedfa] p-3 rounded-2xl rounded-bl-none max-w-[85%] self-start text-black">Olá! Sou a Luna. Dona Maria me ensinou tudo sobre nossas peças. Em que posso te ajudar hoje?</p>
             </div>
-            <div class="p-4 bg-white border-t border-stone-100 flex gap-3">
-                <input type="text" placeholder="Escreva sua dúvida aqui..." class="flex-1 bg-stone-50 p-3 rounded-full text-xs border border-stone-100 focus:border-[#ffcce6] focus:ring-1 focus:ring-[#ffcce6] outline-none">
-                <button class="bg-black text-white px-5 py-3 rounded-full text-[10px] tracking-widest uppercase hover:bg-[#e03a9f]">Enviar</button>
+            <div class="p-4 bg-white border-t border-stone-100 flex gap-2">
+                <input type="text" id="user-input" placeholder="Pergunte sobre as peças..." class="flex-1 bg-stone-50 p-3 rounded-full text-xs outline-none border border-transparent focus:border-[#ffcce6]">
+                <button onclick="sendMessage()" class="bg-black text-white px-4 py-2 rounded-full text-[10px] font-bold uppercase">Enviar</button>
             </div>
         </div>
 
-        <button onclick="toggleChat()" class="hover-effect group w-16 h-16 bg-black rounded-full flex items-center justify-center shadow-2xl hover:bg-[#ffedfa] transition-all">
-            <svg class="w-7 h-7 text-white group-hover:text-[#e03a9f]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 1.66-4 3-9 3s-9-1.34-9-3 4-3 9-3 9 1.34 9 3z"></path></svg>
+        <button onclick="toggleChat()" class="w-14 h-14 md:w-16 md:h-16 bg-[#e03a9f] rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-all">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 1.66-4 3-9 3s-9-1.34-9-3 4-3 9-3 9 1.34 9 3z"></path></svg>
         </button>
     </div>
 
@@ -125,25 +105,29 @@
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('overlay');
-            if (sidebar.classList.contains('-translate-x-full')) {
-                sidebar.classList.remove('-translate-x-full');
-                overlay.classList.add('active');
-            } else { sidebar.classList.add('-translate-x-full'); overlay.classList.remove('active'); }
+            sidebar.classList.toggle('-translate-x-full');
+            overlay.classList.toggle('active');
         }
 
         function toggleChat() {
-            const chatWindow = document.getElementById('chat-window');
-            if (chatWindow.classList.contains('opacity-0')) {
-                // Abre o Chat com Zoom Suave
-                chatWindow.classList.remove('opacity-0', 'scale-0', 'pointer-events-none');
-                chatWindow.classList.add('opacity-1', 'scale-1', 'pointer-events-auto');
-            } else {
-                // Fecha o Chat
-                chatWindow.classList.remove('opacity-1', 'scale-1', 'pointer-events-auto');
-                chatWindow.classList.add('opacity-0', 'scale-0', 'pointer-events-none');
+            const chat = document.getElementById('chat-window');
+            chat.classList.toggle('opacity-0');
+            chat.classList.toggle('scale-0');
+            chat.classList.toggle('pointer-events-none');
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('user-input');
+            const messages = document.getElementById('chat-messages');
+            if (input.value.trim() !== "") {
+                const userMsg = document.createElement('p');
+                userMsg.className = "bg-stone-100 p-3 rounded-2xl rounded-br-none max-w-[85%] self-end text-black";
+                userMsg.innerText = input.value;
+                messages.appendChild(userMsg);
+                input.value = "";
+                messages.scrollTop = messages.scrollHeight;
             }
         }
     </script>
-
 </body>
 </html>
