@@ -3,90 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feminina Bijuteria | Semijoias de Luxo</title>
+    <title>Feminina Bijuteria | Exclusive Selection</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@200;400;600&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
-        .serif { font-family: 'Playfair Display', serif; }
-        #sidebar { transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1); }
-        .overlay { transition: opacity 0.4s ease; pointer-events: none; opacity: 0; }
-        .overlay.active { pointer-events: auto; opacity: 1; }
+        body { font-family: 'Montserrat', sans-serif; background-color: #ffffff; }
+        .serif { font-family: 'Cinzel', serif; }
+        .hero-gradient { background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(0,0,0,0.05) 100%); }
+        .product-card:hover img { transform: scale(1.05); }
+        .product-card img { transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        #sidebar { transition: transform 0.6s cubic-bezier(0.85, 0, 0.15, 1); }
     </style>
 </head>
-<body class="bg-[#faf9f6] text-[#2c2c2c] overflow-x-hidden">
+<body class="text-stone-900">
 
-    <div id="overlay" class="overlay fixed inset-0 bg-black/40 backdrop-blur-sm z-[60]" onclick="toggleSidebar()"></div>
-    
-    <aside id="sidebar" class="fixed top-0 left-0 h-full w-72 bg-white z-[70] shadow-2xl -translate-x-full p-8 flex flex-col justify-between border-r border-[#ffedfa]">
-        <div>
-            <div class="flex justify-between items-center mb-12">
-                <h2 class="serif text-xl tracking-widest uppercase text-[#e03a9f]">Menu</h2>
-                <button onclick="toggleSidebar()" class="text-stone-400 p-2">✕</button>
-            </div>
-            <nav class="space-y-6">
-                <a href="#" class="block text-lg hover:text-[#e03a9f] transition-all">Colares</a>
-                <a href="#" class="block text-lg hover:text-[#e03a9f] transition-all">Brincos</a>
-                <a href="#" class="block text-lg hover:text-[#e03a9f] transition-all">Anéis</a>
-                <a href="https://instagram.com/femininabijuteria" target="_blank" class="block text-lg text-[#e1306c] font-bold">Instagram</a>
-            </nav>
-        </div>
-    </aside>
-
-    <nav class="p-4 md:p-6 flex justify-between items-center bg-white/95 backdrop-blur-md sticky top-0 z-50 border-b border-stone-100 shadow-sm">
-        <div class="flex items-center gap-4">
-            <button onclick="toggleSidebar()" class="p-2">
-                <span class="block w-6 h-[1px] bg-black mb-1.5"></span>
-                <span class="block w-4 h-[1px] bg-black"></span>
+    <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-stone-100 p-4 md:p-6 flex justify-between items-center">
+        <div class="flex items-center gap-6">
+            <button onclick="toggleSidebar()" class="group space-y-1.5">
+                <span class="block w-6 h-0.5 bg-black transition-all group-hover:w-8"></span>
+                <span class="block w-8 h-0.5 bg-black"></span>
             </button>
-            <img src="https://i.postimg.cc/ZKgDBT7F/Whats-App-Image-2026-04-20-at-14-12-55.jpg" alt="Logo" class="h-10 md:h-12 w-auto">
+            <img src="https://i.postimg.cc/ZKgDBT7F/Whats-App-Image-2026-04-20-at-14-12-55.jpg" alt="Logo" class="h-10 md:h-14 object-contain">
         </div>
-        <a href="https://wa.me/5521989626714?text=Olá!%20Vim%20pelo%20site." target="_blank" class="bg-black text-white px-5 py-2.5 text-[10px] tracking-widest uppercase rounded-full font-bold">WhatsApp</a>
+        <div class="hidden md:flex gap-8 text-[10px] tracking-[0.3em] uppercase font-semibold">
+            <a href="#colecao" class="hover:text-[#e03a9f]">Coleção</a>
+            <a href="https://instagram.com/femininabijuteria" target="_blank" class="hover:text-[#e03a9f]">Instagram</a>
+        </div>
+        <a href="https://wa.me/5521989626714" target="_blank" class="bg-black text-white px-6 py-3 text-[10px] tracking-widest uppercase hover:bg-[#e03a9f] transition-all">Contato</a>
     </nav>
 
-    <main class="max-w-6xl mx-auto px-6 py-20 text-center">
-        <h2 class="serif text-4xl md:text-7xl mb-6">Onde a sua beleza <br> <span class="italic text-[#e03a9f]">encontra</span> o brilho.</h2>
-        <p class="text-stone-500 mb-10 max-w-lg mx-auto">Semijoias exclusivas com curadoria de Dona Maria.</p>
-        <a href="https://instagram.com/femininabijuteria" target="_blank" class="text-sm font-bold border-b-2 border-black pb-1 hover:text-[#e03a9f] hover:border-[#e03a9f] transition-all">@femininabijuteria</a>
-    </main>
+    <aside id="sidebar" class="fixed top-0 left-0 h-full w-full md:w-[400px] bg-white z-[60] -translate-x-full p-12 flex flex-col justify-center border-r border-stone-100">
+        <button onclick="toggleSidebar()" class="absolute top-8 right-8 text-2xl">✕</button>
+        <nav class="space-y-8">
+            <a href="#" class="serif block text-3xl hover:translate-x-4 transition-transform">Colares</a>
+            <a href="#" class="serif block text-3xl hover:translate-x-4 transition-transform">Brincos</a>
+            <a href="#" class="serif block text-3xl hover:translate-x-4 transition-transform">Anéis</a>
+            <div class="pt-12 border-t border-stone-100">
+                <p class="text-xs tracking-widest uppercase text-stone-400 mb-4">Siga-nos</p>
+                <a href="https://instagram.com/femininabijuteria" target="_blank" class="text-xl font-light">@femininabijuteria</a>
+            </div>
+        </nav>
+    </aside>
 
-    <div class="fixed bottom-6 right-6 z-[100] flex flex-col items-end gap-4">
-        <div id="chat-window" class="w-[320px] md:w-96 h-[450px] bg-white rounded-3xl shadow-2xl border border-[#ffedfa] flex flex-col opacity-0 scale-0 origin-bottom-right pointer-events-none transition-all">
-            <div class="p-4 bg-[#ffedfa]/50 flex justify-between items-center border-b border-[#ffedfa]">
-                <span class="serif font-bold text-[#e03a9f]">Consultora Luna</span>
-                <button onclick="toggleChat()">✕</button>
+    <header class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=2070')] bg-cover bg-center opacity-20"></div>
+        <div class="relative z-10 text-center px-6">
+            <span class="text-[10px] tracking-[0.5em] uppercase mb-4 block">Curadoria Exclusiva por Valéria</span>
+            <h1 class="serif text-5xl md:text-8xl leading-tight mb-8">Elegância em <br><span class="italic text-[#e03a9f]">cada detalhe</span></h1>
+            <a href="#colecao" class="inline-block border border-black px-10 py-4 text-xs tracking-widest uppercase hover:bg-black hover:text-white transition-all">Explorar Coleção</a>
+        </div>
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
+            <span class="block w-px h-12 bg-stone-300"></span>
+        </div>
+    </header>
+
+    <section id="colecao" class="max-w-7xl mx-auto px-6 py-24">
+        <div class="flex justify-between items-end mb-16">
+            <div>
+                <h2 class="serif text-3xl">Lançamentos</h2>
+                <p class="text-stone-400 text-sm mt-2">Peças selecionadas para realçar sua luz.</p>
             </div>
-            <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-4 text-sm">
-                <p class="bg-[#ffedfa] p-3 rounded-2xl self-start">Olá! Sou a Luna. Qual peça você está procurando hoje?</p>
+            <a href="#" class="text-xs font-bold border-b border-black pb-1">Ver todos</a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div class="product-card group cursor-pointer">
+                <div class="overflow-hidden bg-stone-100 aspect-[3/4] mb-6">
+                    <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=600" alt="Colar" class="w-full h-full object-cover">
+                </div>
+                <h3 class="serif text-lg">Colar Riviera Gold</h3>
+                <p class="text-stone-400 text-sm uppercase tracking-widest mt-1">Semijoia Premium</p>
             </div>
-            <div class="p-4 flex gap-2">
-                <input type="text" id="user-input" placeholder="Pergunte à Luna..." class="flex-1 bg-stone-50 p-2 rounded-full outline-none text-sm">
-                <button onclick="sendMessage()" class="bg-black text-white px-4 py-2 rounded-full text-xs">OK</button>
+            <div class="product-card group cursor-pointer">
+                <div class="overflow-hidden bg-stone-100 aspect-[3/4] mb-6">
+                    <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=600" alt="Brincos" class="w-full h-full object-cover">
+                </div>
+                <h3 class="serif text-lg">Brincos Gota Cristal</h3>
+                <p class="text-stone-400 text-sm uppercase tracking-widest mt-1">Banho 18k</p>
+            </div>
+            <div class="product-card group cursor-pointer">
+                <div class="overflow-hidden bg-stone-100 aspect-[3/4] mb-6">
+                    <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&q=80&w=600" alt="Anel" class="w-full h-full object-cover">
+                </div>
+                <h3 class="serif text-lg">Anel Solitário Infinito</h3>
+                <p class="text-stone-400 text-sm uppercase tracking-widest mt-1">Zircônias Premium</p>
             </div>
         </div>
-        <button onclick="toggleChat()" class="w-16 h-16 bg-[#e03a9f] rounded-full shadow-2xl flex items-center justify-center text-white">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 1.66-4 3-9 3s-9-1.34-9-3 4-3 9-3 9 1.34 9 3z"></path></svg>
+    </section>
+
+    <div class="fixed bottom-8 right-8 z-[100] flex flex-col items-end gap-4">
+        <div id="chat-window" class="w-[320px] md:w-[400px] h-[500px] bg-white rounded-t-3xl rounded-bl-3xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-stone-100 flex flex-col opacity-0 scale-90 origin-bottom-right pointer-events-none transition-all duration-500">
+            <div class="p-6 bg-black text-white rounded-t-3xl flex justify-between items-center">
+                <div>
+                    <p class="text-[10px] tracking-[0.2em] uppercase opacity-60">Consultoria Online</p>
+                    <h3 class="serif text-lg">Luna</h3>
+                </div>
+                <button onclick="toggleChat()" class="hover:rotate-90 transition-transform">✕</button>
+            </div>
+            <div id="chat-messages" class="flex-1 p-6 overflow-y-auto space-y-6 text-sm">
+                <div class="flex gap-3">
+                    <div class="w-8 h-8 rounded-full bg-[#e03a9f] flex-shrink-0 flex items-center justify-center text-white text-[10px] font-bold">L</div>
+                    <p class="bg-stone-50 p-4 rounded-2xl rounded-tl-none">Seja bem-vinda à Feminina! Sou a Luna. Deseja ver alguma peça da seleção da Valéria hoje?</p>
+                </div>
+            </div>
+            <div class="p-6 border-t border-stone-50 flex gap-3">
+                <input type="text" id="user-input" placeholder="Escreva aqui..." class="flex-1 bg-stone-50 p-4 rounded-xl outline-none text-sm border border-transparent focus:border-[#e03a9f]/20">
+                <button onclick="sendMessage()" class="bg-black text-white px-6 rounded-xl hover:bg-[#e03a9f] transition-all">Enviar</button>
+            </div>
+        </div>
+        <button onclick="toggleChat()" class="w-16 h-16 bg-black hover:bg-[#e03a9f] rounded-full shadow-2xl flex items-center justify-center text-white transition-all transform hover:scale-110">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 1.66-4 3-9 3s-9-1.34-9-3 4-3 9-3 9 1.34 9 3z"></path></svg>
         </button>
     </div>
 
     <script>
         function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('-translate-x-full');
-            document.getElementById('overlay').classList.toggle('active');
+            const sb = document.getElementById('sidebar');
+            sb.classList.toggle('-translate-x-full');
         }
         function toggleChat() {
             const chat = document.getElementById('chat-window');
             chat.classList.toggle('opacity-0');
-            chat.classList.toggle('scale-0');
+            chat.classList.toggle('scale-90');
             chat.classList.toggle('pointer-events-none');
         }
         async function sendMessage() {
             const input = document.getElementById('user-input');
             const messages = document.getElementById('chat-messages');
             const text = input.value.trim();
-            if (text === "") return;
+            if (!text) return;
 
-            messages.innerHTML += `<p class="bg-stone-100 p-3 rounded-2xl self-end text-right">${text}</p>`;
+            messages.innerHTML += `<div class="flex justify-end"><p class="bg-black text-white p-4 rounded-2xl rounded-tr-none text-right max-w-[80%]">${text}</p></div>`;
             input.value = "";
             messages.scrollTop = messages.scrollHeight;
 
@@ -96,7 +143,7 @@
                 body: JSON.stringify({message: text})
             });
             const data = await response.json();
-            messages.innerHTML += `<p class="bg-[#ffedfa] p-3 rounded-2xl self-start">${data.response}</p>`;
+            messages.innerHTML += `<div class="flex gap-3"><div class="w-8 h-8 rounded-full bg-[#e03a9f] flex-shrink-0 flex items-center justify-center text-white text-[10px] font-bold">L</div><p class="bg-stone-50 p-4 rounded-2xl rounded-tl-none max-w-[80%]">${data.response}</p></div>`;
             messages.scrollTop = messages.scrollHeight;
         }
     </script>
