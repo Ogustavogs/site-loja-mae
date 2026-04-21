@@ -6,14 +6,9 @@ from groq import Groq
 app = Flask(__name__)
 CORS(app)
 
-# Tenta ler do Render, se não tiver, usa a que você criou agora
-api_key = os.environ.get("GROQ_API_KEY", "SUA_CHAVE_NOVA_AQUI")
-
-try:
-    # Forçamos a inicialização do cliente dentro da rota para evitar erro de boot
-    client = Groq(api_key=api_key)
-except Exception as e:
-    print(f"Erro ao iniciar Groq: {e}")
+# O segredo está aqui: ele lê a variável que você salvou no painel do Render
+api_key = os.environ.get("GROQ_API_KEY")
+client = Groq(api_key=api_key)
 
 @app.route('/')
 def index():
@@ -22,25 +17,21 @@ def index():
 @app.route('/chat', methods=['POST'])
 def chat():
     user_message = request.json.get("message")
+    if not api_key:
+        return jsonify({"response": "Luna sem cérebro! Valéria, configure a GROQ_API_KEY no Render."})
     
     try:
-        # Usando o modelo 70b que é mais estável para conversas longas
         completion = client.chat.completions.create(
-            model="llama3-70b-8192", 
+            model="llama3-8b-8192", 
             messages=[
-                {
-                    "role": "system", 
-                    "content": "Você é a Luna, consultora da Feminina Bijuteria. A fundadora é a Valéria. Seja elegante e direcione para o WhatsApp: https://wa.me/5521989626714"
-                },
+                {"role": "system", "content": "Você é a Luna, consultora da Feminina Bijuteria. A fundadora é a Valéria. Seja elegante e sofisticada."},
                 {"role": "user", "content": user_message}
             ],
         )
-        response = completion.choices[0].message.content
-        return jsonify({"response": response})
+        return jsonify({"response": completion.choices[0].message.content})
     except Exception as e:
-        # Se der erro, ele vai imprimir no log do Render o motivo real
-        print(f"ERRO REAL DA API: {e}")
-        return jsonify({"response": "Oi! Tive um soluço na conexão. Pode falar com a Valéria no WhatsApp enquanto eu me recupero?"})
+        return jsonify({"response": "Oi! Tive um soluço, fala com a Valéria no WhatsApp!"})
 
 if __name__ == '__main__':
     app.run(debug=True)
+
