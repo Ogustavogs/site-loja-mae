@@ -13,25 +13,24 @@ def index():
 @app.route('/chat', methods=['POST'])
 def chat():
     user_message = request.json.get("message")
-    
-    # Ele busca a chave que você salvou no painel do Render
     api_key = os.environ.get("GROQ_API_KEY")
     
     if not api_key:
-        return jsonify({"response": "Luna sem chave! Valéria, configure a variável no Render."})
+        return jsonify({"response": "Luna sem chave no Render!"})
     
     try:
         client = Groq(api_key=api_key)
+        # Usando o modelo mais atualizado e estável
         completion = client.chat.completions.create(
-            model="llama3-8b-8192", 
+            model="llama-3.1-8b-instant", 
             messages=[
-                {"role": "system", "content": "Você é a Luna, consultora da Feminina Bijuteria. A fundadora é a Valéria. Seja elegante e sofisticada."},
+                {"role": "system", "content": "Você é a Luna, consultora da Feminina Bijuteria. Seja breve e elegante."},
                 {"role": "user", "content": user_message}
             ],
         )
         return jsonify({"response": completion.choices[0].message.content})
     except Exception as e:
-        return jsonify({"response": f"Erro na conexão: {str(e)[:40]}"})
+        return jsonify({"response": f"Erro: {str(e)[:50]}"})
 
 if __name__ == '__main__':
     app.run(debug=True)
