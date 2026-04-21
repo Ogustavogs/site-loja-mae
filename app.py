@@ -6,7 +6,7 @@ from groq import Groq
 app = Flask(__name__)
 CORS(app)
 
-# Tenta pegar a chave do Render, se não achar, usa a que você me passou
+# Sua chave continua aqui para funcionar direto
 api_key = os.environ.get("GROQ_API_KEY", "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")
 client = Groq(api_key=api_key)
 
@@ -24,7 +24,7 @@ def chat():
             messages=[
                 {
                     "role": "system", 
-                    "content": "Você é a Luna, a consultora de moda inteligente da loja Feminina Bijuteria, no Rio de Janeiro. Sua chefe é a Dona Maria. Você é elegante, carinhosa e especialista em semijoias (colares, brincos, anéis). Ajude as clientes a escolherem peças que combinem com seu estilo e sempre sugira que elas chamem a Dona Maria no WhatsApp para finalizar a compra."
+                    "content": "Você é a Luna, consultora de luxo da Feminina Bijuteria em Rio de Janeiro. A fundadora da loja é a Valéria. Você é extremamente educada, sofisticada e ajuda as clientes a escolherem as melhores semijoias. Jamais use o termo 'Dona' para se referir à Valéria, trate-a apenas pelo nome ou como 'nossa fundadora'. Sempre direcione para o WhatsApp se a cliente quiser comprar."
                 },
                 {"role": "user", "content": user_message}
             ],
@@ -32,7 +32,7 @@ def chat():
         response = completion.choices[0].message.content
         return jsonify({"response": response})
     except Exception as e:
-        return jsonify({"response": "Oi, linda! Estou ajustando meus brilhos. Pode falar com a Dona Maria no WhatsApp enquanto isso?"})
+        return jsonify({"response": "Oi! Tive um pequeno problema técnico, mas você pode falar diretamente com a Valéria no WhatsApp!"})
 
 if __name__ == '__main__':
     app.run(debug=True)
