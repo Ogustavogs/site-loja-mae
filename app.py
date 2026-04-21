@@ -6,7 +6,8 @@ from groq import Groq
 app = Flask(__name__)
 CORS(app)
 
-# Sua chave continua aqui para funcionar direto
+# Aqui está o segredo: ele tenta ler a chave do Render (Ambiente Seguro)
+# Se não achar nada, ele usa a chave reserva que deixamos aqui
 api_key = os.environ.get("GROQ_API_KEY", "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")
 client = Groq(api_key=api_key)
 
@@ -24,7 +25,13 @@ def chat():
             messages=[
                 {
                     "role": "system", 
-                    "content": "Você é a Luna, consultora de luxo da Feminina Bijuteria em Rio de Janeiro. A fundadora da loja é a Valéria. Você é extremamente educada, sofisticada e ajuda as clientes a escolherem as melhores semijoias. Jamais use o termo 'Dona' para se referir à Valéria, trate-a apenas pelo nome ou como 'nossa fundadora'. Sempre direcione para o WhatsApp se a cliente quiser comprar."
+                    "content": (
+                        "Você é a Luna, a consultora de estilo oficial da Feminina Bijuteria. "
+                        "Sua fundadora se chama Valéria. Você é sofisticada, acolhedora e elegante. "
+                        "Nunca use o termo 'Dona' para se referir à Valéria; chame-a pelo nome ou 'nossa curadora'. "
+                        "Seu objetivo é ajudar as clientes a escolherem semijoias incríveis. "
+                        "Sempre que falarem de compra ou preço, direcione para o WhatsApp: https://wa.me/5521989626714"
+                    )
                 },
                 {"role": "user", "content": user_message}
             ],
@@ -32,7 +39,8 @@ def chat():
         response = completion.choices[0].message.content
         return jsonify({"response": response})
     except Exception as e:
-        return jsonify({"response": "Oi! Tive um pequeno problema técnico, mas você pode falar diretamente com a Valéria no WhatsApp!"})
+        print(f"Erro na Luna: {e}")
+        return jsonify({"response": "Oi! Tive um pequeno soluço aqui na conexão, mas você pode falar com a Valéria agora mesmo no WhatsApp!"})
 
 if __name__ == '__main__':
     app.run(debug=True)
