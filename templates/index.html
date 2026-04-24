@@ -3,148 +3,287 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feminina Bijuteria | Exclusive Selection</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@200;400;600&display=swap" rel="stylesheet">
+    <title>Feminina - Seleção Valéria</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
     <style>
-        body { font-family: 'Montserrat', sans-serif; background-color: #ffffff; }
-        .serif { font-family: 'Cinzel', serif; }
-        .hero-gradient { background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(0,0,0,0.05) 100%); }
-        .product-card:hover img { transform: scale(1.05); }
-        .product-card img { transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-        #sidebar { transition: transform 0.6s cubic-bezier(0.85, 0, 0.15, 1); }
+        :root {
+            /* CORES DA MARCA - Edite aqui para mudar o site todo */
+            --cor-primaria: #D4AF37; /* Dourado da marca */
+            --cor-fundo: #050505;    /* Preto luxo */
+            --cor-card: #121212;     /* Fundo dos produtos */
+            --cor-texto: #ffffff;
+            --font-titulo: 'Playfair Display', serif;
+            --font-corpo: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            font-family: var(--font-corpo);
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* HEADER */
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        header h1 {
+            font-family: var(--font-titulo);
+            font-size: 3rem;
+            color: var(--cor-primaria);
+            margin: 0;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+        }
+
+        header p {
+            letter-spacing: 3px;
+            font-weight: 300;
+            opacity: 0.8;
+            margin-top: 10px;
+        }
+
+        /* VITRINE */
+        .vitrine {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            padding: 60px 10%;
+        }
+
+        .produto-card {
+            background: var(--cor-card);
+            border: 1px solid #222;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .produto-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--cor-primaria);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
+        }
+
+        .produto-card img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .produto-card h3 {
+            font-family: var(--font-titulo);
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .produto-card .preco {
+            color: var(--cor-primaria);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .btn-add {
+            background: transparent;
+            color: var(--cor-primaria);
+            border: 1px solid var(--cor-primaria);
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .btn-add:hover {
+            background: var(--cor-primaria);
+            color: #000;
+        }
+
+        /* CARRINHO LATERAL */
+        #carrinho-lateral {
+            position: fixed;
+            right: -400px;
+            top: 0;
+            width: 350px;
+            height: 100vh;
+            background: #0f0f0f;
+            border-left: 1px solid var(--cor-primaria);
+            padding: 40px 20px;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.8);
+            transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 2000;
+        }
+
+        #carrinho-lateral.ativo {
+            right: 0;
+        }
+
+        .fechar-carrinho {
+            background: none;
+            border: none;
+            color: var(--cor-primaria);
+            font-size: 1.5rem;
+            cursor: pointer;
+            float: right;
+        }
+
+        .item-carrinho {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #222;
+            padding: 15px 0;
+        }
+
+        .total-container {
+            margin-top: 40px;
+            font-size: 1.3rem;
+            text-align: right;
+            border-top: 1px solid var(--cor-primaria);
+            padding-top: 20px;
+        }
+
+        .btn-whatsapp {
+            background: #25d366;
+            color: #fff;
+            border: none;
+            width: 100%;
+            padding: 18px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        /* LUNA (Botão de Suporte) */
+        #luna-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: var(--cor-primaria);
+            color: #000;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+            z-index: 1500;
+            font-size: 1.5rem;
+        }
+
     </style>
 </head>
-<body class="text-stone-900">
+<body>
 
-    <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-stone-100 p-4 md:p-6 flex justify-between items-center">
-        <div class="flex items-center gap-6">
-            <button onclick="toggleSidebar()" class="group space-y-1.5">
-                <span class="block w-6 h-0.5 bg-black transition-all group-hover:w-8"></span>
-                <span class="block w-8 h-0.5 bg-black"></span>
-            </button>
-            <img src="https://i.postimg.cc/ZKgDBT7F/Whats-App-Image-2026-04-20-at-14-12-55.jpg" alt="Logo" class="h-10 md:h-14 object-contain">
-        </div>
-        <div class="hidden md:flex gap-8 text-[10px] tracking-[0.3em] uppercase font-semibold">
-            <a href="#colecao" class="hover:text-[#e03a9f]">Coleção</a>
-            <a href="https://instagram.com/femininabijuteria" target="_blank" class="hover:text-[#e03a9f]">Instagram</a>
-        </div>
-        <a href="https://wa.me/5521989626714" target="_blank" class="bg-black text-white px-6 py-3 text-[10px] tracking-widest uppercase hover:bg-[#e03a9f] transition-all">Contato</a>
-    </nav>
-
-    <aside id="sidebar" class="fixed top-0 left-0 h-full w-full md:w-[400px] bg-white z-[60] -translate-x-full p-12 flex flex-col justify-center border-r border-stone-100">
-        <button onclick="toggleSidebar()" class="absolute top-8 right-8 text-2xl">✕</button>
-        <nav class="space-y-8">
-            <a href="#" class="serif block text-3xl hover:translate-x-4 transition-transform">Colares</a>
-            <a href="#" class="serif block text-3xl hover:translate-x-4 transition-transform">Brincos</a>
-            <a href="#" class="serif block text-3xl hover:translate-x-4 transition-transform">Anéis</a>
-            <div class="pt-12 border-t border-stone-100">
-                <p class="text-xs tracking-widest uppercase text-stone-400 mb-4">Siga-nos</p>
-                <a href="https://instagram.com/femininabijuteria" target="_blank" class="text-xl font-light">@femininabijuteria</a>
-            </div>
-        </nav>
-    </aside>
-
-    <header class="relative h-screen flex items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=2070')] bg-cover bg-center opacity-20"></div>
-        <div class="relative z-10 text-center px-6">
-            <span class="text-[10px] tracking-[0.5em] uppercase mb-4 block">Curadoria Exclusiva por Valéria</span>
-            <h1 class="serif text-5xl md:text-8xl leading-tight mb-8">Elegância em <br><span class="italic text-[#e03a9f]">cada detalhe</span></h1>
-            <a href="#colecao" class="inline-block border border-black px-10 py-4 text-xs tracking-widest uppercase hover:bg-black hover:text-white transition-all">Explorar Coleção</a>
-        </div>
-        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
-            <span class="block w-px h-12 bg-stone-300"></span>
-        </div>
+    <header>
+        <h1>Feminina</h1>
+        <p>Curadoria por Valéria</p>
     </header>
 
-    <section id="colecao" class="max-w-7xl mx-auto px-6 py-24">
-        <div class="flex justify-between items-end mb-16">
-            <div>
-                <h2 class="serif text-3xl">Lançamentos</h2>
-                <p class="text-stone-400 text-sm mt-2">Peças selecionadas para realçar sua luz.</p>
-            </div>
-            <a href="#" class="text-xs font-bold border-b border-black pb-1">Ver todos</a>
+    <section class="vitrine">
+        <div class="produto-card">
+            <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=400" alt="Brinco">
+            <h3>Brinco Argola Ouro</h3>
+            <div class="preco">R$ 89,90</div>
+            <button class="btn-add" onclick="adicionarAoCarrinho('Brinco Argola Ouro', 89.90)">Adicionar</button>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-            <div class="product-card group cursor-pointer">
-                <div class="overflow-hidden bg-stone-100 aspect-[3/4] mb-6">
-                    <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=600" alt="Colar" class="w-full h-full object-cover">
-                </div>
-                <h3 class="serif text-lg">Colar Riviera Gold</h3>
-                <p class="text-stone-400 text-sm uppercase tracking-widest mt-1">Semijoia Premium</p>
-            </div>
-            <div class="product-card group cursor-pointer">
-                <div class="overflow-hidden bg-stone-100 aspect-[3/4] mb-6">
-                    <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=600" alt="Brincos" class="w-full h-full object-cover">
-                </div>
-                <h3 class="serif text-lg">Brincos Gota Cristal</h3>
-                <p class="text-stone-400 text-sm uppercase tracking-widest mt-1">Banho 18k</p>
-            </div>
-            <div class="product-card group cursor-pointer">
-                <div class="overflow-hidden bg-stone-100 aspect-[3/4] mb-6">
-                    <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&q=80&w=600" alt="Anel" class="w-full h-full object-cover">
-                </div>
-                <h3 class="serif text-lg">Anel Solitário Infinito</h3>
-                <p class="text-stone-400 text-sm uppercase tracking-widest mt-1">Zircônias Premium</p>
-            </div>
+        <div class="produto-card">
+            <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=400" alt="Colar">
+            <h3>Colar Minimalista</h3>
+            <div class="preco">R$ 129,90</div>
+            <button class="btn-add" onclick="adicionarAoCarrinho('Colar Minimalista', 129.90)">Adicionar</button>
         </div>
     </section>
 
-    <div class="fixed bottom-8 right-8 z-[100] flex flex-col items-end gap-4">
-        <div id="chat-window" class="w-[320px] md:w-[400px] h-[500px] bg-white rounded-t-3xl rounded-bl-3xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-stone-100 flex flex-col opacity-0 scale-90 origin-bottom-right pointer-events-none transition-all duration-500">
-            <div class="p-6 bg-black text-white rounded-t-3xl flex justify-between items-center">
-                <div>
-                    <p class="text-[10px] tracking-[0.2em] uppercase opacity-60">Consultoria Online</p>
-                    <h3 class="serif text-lg">Luna</h3>
-                </div>
-                <button onclick="toggleChat()" class="hover:rotate-90 transition-transform">✕</button>
-            </div>
-            <div id="chat-messages" class="flex-1 p-6 overflow-y-auto space-y-6 text-sm">
-                <div class="flex gap-3">
-                    <div class="w-8 h-8 rounded-full bg-[#e03a9f] flex-shrink-0 flex items-center justify-center text-white text-[10px] font-bold">L</div>
-                    <p class="bg-stone-50 p-4 rounded-2xl rounded-tl-none">Seja bem-vinda à Feminina! Sou a Luna. Deseja ver alguma peça da seleção da Valéria hoje?</p>
-                </div>
-            </div>
-            <div class="p-6 border-t border-stone-50 flex gap-3">
-                <input type="text" id="user-input" placeholder="Escreva aqui..." class="flex-1 bg-stone-50 p-4 rounded-xl outline-none text-sm border border-transparent focus:border-[#e03a9f]/20">
-                <button onclick="sendMessage()" class="bg-black text-white px-6 rounded-xl hover:bg-[#e03a9f] transition-all">Enviar</button>
-            </div>
+    <div id="carrinho-lateral">
+        <button class="fechar-carrinho" onclick="toggleCarrinho()">&times;</button>
+        <h2 style="font-family: var(--font-titulo); color: var(--cor-primaria);">Seu Pedido</h2>
+        <div id="itens-carrinho"></div>
+        <div class="total-container">
+            Total: <strong>R$ <span id="valor-total">0.00</span></strong>
         </div>
-        <button onclick="toggleChat()" class="w-16 h-16 bg-black hover:bg-[#e03a9f] rounded-full shadow-2xl flex items-center justify-center text-white transition-all transform hover:scale-110">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 1.66-4 3-9 3s-9-1.34-9-3 4-3 9-3 9 1.34 9 3z"></path></svg>
+        <button class="btn-whatsapp" onclick="enviarParaWhatsapp()">
+            Finalizar no WhatsApp
         </button>
     </div>
 
+    <div id="luna-btn" onclick="alert('Luna: Oi! Estou aqui para ajudar com suas dúvidas sobre as peças da Valéria.')">
+        ✨
+    </div>
+
     <script>
-        function toggleSidebar() {
-            const sb = document.getElementById('sidebar');
-            sb.classList.toggle('-translate-x-full');
-        }
-        function toggleChat() {
-            const chat = document.getElementById('chat-window');
-            chat.classList.toggle('opacity-0');
-            chat.classList.toggle('scale-90');
-            chat.classList.toggle('pointer-events-none');
-        }
-        async function sendMessage() {
-            const input = document.getElementById('user-input');
-            const messages = document.getElementById('chat-messages');
-            const text = input.value.trim();
-            if (!text) return;
+        let carrinho = [];
 
-            messages.innerHTML += `<div class="flex justify-end"><p class="bg-black text-white p-4 rounded-2xl rounded-tr-none text-right max-w-[80%]">${text}</p></div>`;
-            input.value = "";
-            messages.scrollTop = messages.scrollHeight;
+        function toggleCarrinho() {
+            document.getElementById('carrinho-lateral').classList.toggle('ativo');
+        }
 
-            const response = await fetch('/chat', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({message: text})
+        function adicionarAoCarrinho(nome, preco) {
+            carrinho.push({ nome, preco });
+            atualizarInterfaceCarrinho();
+            if(!document.getElementById('carrinho-lateral').classList.contains('ativo')) {
+                toggleCarrinho();
+            }
+        }
+
+        function atualizarInterfaceCarrinho() {
+            const lista = document.getElementById('itens-carrinho');
+            const totalSpan = document.getElementById('valor-total');
+            let total = 0;
+            
+            lista.innerHTML = '';
+            carrinho.forEach((item, index) => {
+                total += item.preco;
+                lista.innerHTML += `
+                    <div class="item-carrinho">
+                        <div>
+                            <strong>${item.nome}</strong><br>
+                            <small style="color: var(--cor-primaria)">R$ ${item.preco.toFixed(2)}</small>
+                        </div>
+                        <button onclick="removerItem(${index})" style="background:none; border:none; color:red; cursor:pointer;">&times;</button>
+                    </div>`;
             });
-            const data = await response.json();
-            messages.innerHTML += `<div class="flex gap-3"><div class="w-8 h-8 rounded-full bg-[#e03a9f] flex-shrink-0 flex items-center justify-center text-white text-[10px] font-bold">L</div><p class="bg-stone-50 p-4 rounded-2xl rounded-tl-none max-w-[80%]">${data.response}</p></div>`;
-            messages.scrollTop = messages.scrollHeight;
+            
+            totalSpan.innerText = total.toFixed(2);
+        }
+
+        function removerItem(index) {
+            carrinho.splice(index, 1);
+            atualizarInterfaceCarrinho();
+        }
+
+        function enviarParaWhatsapp() {
+            if (carrinho.length === 0) return alert("O carrinho está vazio!");
+
+            let mensagem = "Oi Valéria! Escolhi essas peças no site:\n\n";
+            carrinho.forEach(item => {
+                mensagem += `- ${item.nome} (R$ ${item.preco.toFixed(2)})\n`;
+            });
+            
+            const total = document.getElementById('valor-total').innerText;
+            mensagem += `\n*Total: R$ ${total}*\n\nComo posso realizar o pagamento?`;
+
+            const telefone = "55219XXXXXXXX"; // <-- TROQUE PELO ZAP DA VALÉRIA
+            window.open(`https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)}`, '_blank');
         }
     </script>
 </body>
