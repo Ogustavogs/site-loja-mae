@@ -12,7 +12,7 @@
         .hero-gradient { background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(0,0,0,0.05) 100%); }
         .product-card:hover img { transform: scale(1.05); }
         .product-card img { transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-        #sidebar { transition: transform 0.6s cubic-bezier(0.85, 0, 0.15, 1); }
+        #sidebar, #cart-sidebar { transition: transform 0.6s cubic-bezier(0.85, 0, 0.15, 1); }
     </style>
 </head>
 <body class="text-stone-900">
@@ -25,11 +25,13 @@
             </button>
             <img src="https://i.postimg.cc/ZKgDBT7F/Whats-App-Image-2026-04-20-at-14-12-55.jpg" alt="Logo" class="h-10 md:h-14 object-contain">
         </div>
-        <div class="hidden md:flex gap-8 text-[10px] tracking-[0.3em] uppercase font-semibold">
-            <a href="#colecao" class="hover:text-[#e03a9f]">Coleção</a>
-            <a href="https://instagram.com/femininabijuteria" target="_blank" class="hover:text-[#e03a9f]">Instagram</a>
+        <div class="flex items-center gap-4 md:gap-8">
+            <button onclick="toggleCart()" class="relative p-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" stroke-width="1.5"></path></svg>
+                <span id="cart-count" class="absolute top-0 right-0 bg-[#e03a9f] text-white text-[8px] w-4 h-4 rounded-full flex items-center justify-center">0</span>
+            </button>
+            <a href="https://wa.me/5521989626714" target="_blank" class="hidden md:block bg-black text-white px-6 py-3 text-[10px] tracking-widest uppercase hover:bg-[#e03a9f] transition-all">Contato</a>
         </div>
-        <a href="https://wa.me/5521989626714" target="_blank" class="bg-black text-white px-6 py-3 text-[10px] tracking-widest uppercase hover:bg-[#e03a9f] transition-all">Contato</a>
     </nav>
 
     <aside id="sidebar" class="fixed top-0 left-0 h-full w-full md:w-[400px] bg-white z-[60] -translate-x-full p-12 flex flex-col justify-center border-r border-stone-100">
@@ -38,11 +40,23 @@
             <a href="#" class="serif block text-3xl hover:translate-x-4 transition-transform">Colares</a>
             <a href="#" class="serif block text-3xl hover:translate-x-4 transition-transform">Brincos</a>
             <a href="#" class="serif block text-3xl hover:translate-x-4 transition-transform">Anéis</a>
-            <div class="pt-12 border-t border-stone-100">
-                <p class="text-xs tracking-widest uppercase text-stone-400 mb-4">Siga-nos</p>
-                <a href="https://instagram.com/femininabijuteria" target="_blank" class="text-xl font-light">@femininabijuteria</a>
-            </div>
         </nav>
+    </aside>
+
+    <aside id="cart-sidebar" class="fixed top-0 right-0 h-full w-full md:w-[400px] bg-white z-[60] translate-x-full p-8 flex flex-col border-l border-stone-100">
+        <div class="flex justify-between items-center mb-12">
+            <h2 class="serif text-2xl">Seu Carrinho</h2>
+            <button onclick="toggleCart()" class="text-2xl">✕</button>
+        </div>
+        <div id="cart-items" class="flex-1 overflow-y-auto space-y-6">
+            </div>
+        <div class="pt-8 border-t border-stone-100">
+            <div class="flex justify-between text-xl serif mb-6">
+                <span>Total</span>
+                <span id="cart-total">R$ 0,00</span>
+            </div>
+            <button onclick="checkoutWhatsApp()" class="w-full bg-black text-white py-5 text-[10px] tracking-[0.3em] uppercase hover:bg-[#e03a9f] transition-all">Finalizar no WhatsApp</button>
+        </div>
     </aside>
 
     <header class="relative h-screen flex items-center justify-center overflow-hidden">
@@ -52,41 +66,25 @@
             <h1 class="serif text-5xl md:text-8xl leading-tight mb-8">Elegância em <br><span class="italic text-[#e03a9f]">cada detalhe</span></h1>
             <a href="#colecao" class="inline-block border border-black px-10 py-4 text-xs tracking-widest uppercase hover:bg-black hover:text-white transition-all">Explorar Coleção</a>
         </div>
-        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
-            <span class="block w-px h-12 bg-stone-300"></span>
-        </div>
     </header>
 
     <section id="colecao" class="max-w-7xl mx-auto px-6 py-24">
-        <div class="flex justify-between items-end mb-16">
-            <div>
-                <h2 class="serif text-3xl">Lançamentos</h2>
-                <p class="text-stone-400 text-sm mt-2">Peças selecionadas para realçar sua luz.</p>
-            </div>
-            <a href="#" class="text-xs font-bold border-b border-black pb-1">Ver todos</a>
-        </div>
-
         <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
             <div class="product-card group cursor-pointer">
-                <div class="overflow-hidden bg-stone-100 aspect-[3/4] mb-6">
-                    <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=600" alt="Colar" class="w-full h-full object-cover">
+                <div class="overflow-hidden bg-stone-100 aspect-[3/4] mb-6 relative">
+                    <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover">
+                    <button onclick="addToCart('Colar Riviera Gold', 189.90)" class="absolute bottom-4 left-4 right-4 bg-white/90 py-3 text-[10px] tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-all hover:bg-black hover:text-white">Adicionar ao Carrinho</button>
                 </div>
-                <h3 class="serif text-lg">Colar Riviera Gold</h3>
-                <p class="text-stone-400 text-sm uppercase tracking-widest mt-1">Semijoia Premium</p>
+                <h3 class="serif text-lg text-center">Colar Riviera Gold</h3>
+                <p class="text-[#e03a9f] text-center font-semibold mt-1">R$ 189,90</p>
             </div>
             <div class="product-card group cursor-pointer">
-                <div class="overflow-hidden bg-stone-100 aspect-[3/4] mb-6">
-                    <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=600" alt="Brincos" class="w-full h-full object-cover">
+                <div class="overflow-hidden bg-stone-100 aspect-[3/4] mb-6 relative">
+                    <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover">
+                    <button onclick="addToCart('Brincos Gota Cristal', 89.90)" class="absolute bottom-4 left-4 right-4 bg-white/90 py-3 text-[10px] tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-all hover:bg-black hover:text-white">Adicionar ao Carrinho</button>
                 </div>
-                <h3 class="serif text-lg">Brincos Gota Cristal</h3>
-                <p class="text-stone-400 text-sm uppercase tracking-widest mt-1">Banho 18k</p>
-            </div>
-            <div class="product-card group cursor-pointer">
-                <div class="overflow-hidden bg-stone-100 aspect-[3/4] mb-6">
-                    <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&q=80&w=600" alt="Anel" class="w-full h-full object-cover">
-                </div>
-                <h3 class="serif text-lg">Anel Solitário Infinito</h3>
-                <p class="text-stone-400 text-sm uppercase tracking-widest mt-1">Zircônias Premium</p>
+                <h3 class="serif text-lg text-center">Brincos Gota Cristal</h3>
+                <p class="text-[#e03a9f] text-center font-semibold mt-1">R$ 89,90</p>
             </div>
         </div>
     </section>
@@ -98,45 +96,67 @@
                     <p class="text-[10px] tracking-[0.2em] uppercase opacity-60">Consultoria Online</p>
                     <h3 class="serif text-lg">Luna</h3>
                 </div>
-                <button onclick="toggleChat()" class="hover:rotate-90 transition-transform">✕</button>
+                <button onclick="toggleChat()">✕</button>
             </div>
-            <div id="chat-messages" class="flex-1 p-6 overflow-y-auto space-y-6 text-sm">
-                <div class="flex gap-3">
-                    <div class="w-8 h-8 rounded-full bg-[#e03a9f] flex-shrink-0 flex items-center justify-center text-white text-[10px] font-bold">L</div>
-                    <p class="bg-stone-50 p-4 rounded-2xl rounded-tl-none">Seja bem-vinda à Feminina! Sou a Luna. Deseja ver alguma peça da seleção da Valéria hoje?</p>
-                </div>
-            </div>
+            <div id="chat-messages" class="flex-1 p-6 overflow-y-auto space-y-6 text-sm"></div>
             <div class="p-6 border-t border-stone-50 flex gap-3">
                 <input type="text" id="user-input" placeholder="Escreva aqui..." class="flex-1 bg-stone-50 p-4 rounded-xl outline-none text-sm border border-transparent focus:border-[#e03a9f]/20">
                 <button onclick="sendMessage()" class="bg-black text-white px-6 rounded-xl hover:bg-[#e03a9f] transition-all">Enviar</button>
             </div>
         </div>
         <button onclick="toggleChat()" class="w-16 h-16 bg-black hover:bg-[#e03a9f] rounded-full shadow-2xl flex items-center justify-center text-white transition-all transform hover:scale-110">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 1.66-4 3-9 3s-9-1.34-9-3 4-3 9-3 9 1.34 9 3z"></path></svg>
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 1.66-4 3-9 3s-9-1.34-9-3 4-3 9-3 9 1.34 9 3z" stroke-width="1.5"></path></svg>
         </button>
     </div>
 
     <script>
-        function toggleSidebar() {
-            const sb = document.getElementById('sidebar');
-            sb.classList.toggle('-translate-x-full');
-        }
-        function toggleChat() {
+        let cart = [];
+
+        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('-translate-x-full'); }
+        function toggleCart() { document.getElementById('cart-sidebar').classList.toggle('translate-x-full'); }
+        function toggleChat() { 
             const chat = document.getElementById('chat-window');
-            chat.classList.toggle('opacity-0');
-            chat.classList.toggle('scale-90');
-            chat.classList.toggle('pointer-events-none');
+            chat.classList.toggle('opacity-0'); chat.classList.toggle('scale-90'); chat.classList.toggle('pointer-events-none');
         }
+
+        function addToCart(name, price) {
+            cart.push({name, price});
+            updateCart();
+            if(document.getElementById('cart-sidebar').classList.contains('translate-x-full')) toggleCart();
+        }
+
+        function updateCart() {
+            const list = document.getElementById('cart-items');
+            const totalDisplay = document.getElementById('cart-total');
+            const countDisplay = document.getElementById('cart-count');
+            let total = 0;
+            list.innerHTML = '';
+            cart.forEach((item, index) => {
+                total += item.price;
+                list.innerHTML += `<div class="flex justify-between items-center border-b border-stone-50 pb-4">
+                    <div><p class="font-semibold text-sm">${item.name}</p><p class="text-xs text-[#e03a9f]">R$ ${item.price.toFixed(2)}</p></div>
+                    <button onclick="cart.splice(${index},1);updateCart()" class="text-stone-300 hover:text-black">✕</button>
+                </div>`;
+            });
+            totalDisplay.innerText = `R$ ${total.toFixed(2)}`;
+            countDisplay.innerText = cart.length;
+        }
+
+        function checkoutWhatsApp() {
+            if(cart.length === 0) return;
+            let msg = "Oi Valéria! Escolhi essas peças no site:\n\n";
+            cart.forEach(i => msg += `- ${i.name} (R$ ${i.price.toFixed(2)})\n`);
+            msg += `\n*Total: R$ ${cart.reduce((a,b)=>a+b.price,0).toFixed(2)}*`;
+            window.open(`https://wa.me/5521989626714?text=${encodeURIComponent(msg)}`);
+        }
+
         async function sendMessage() {
             const input = document.getElementById('user-input');
             const messages = document.getElementById('chat-messages');
             const text = input.value.trim();
             if (!text) return;
-
             messages.innerHTML += `<div class="flex justify-end"><p class="bg-black text-white p-4 rounded-2xl rounded-tr-none text-right max-w-[80%]">${text}</p></div>`;
             input.value = "";
-            messages.scrollTop = messages.scrollHeight;
-
             const response = await fetch('/chat', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
